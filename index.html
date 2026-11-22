@@ -481,7 +481,7 @@ function toast(msg) {
 /* ----- Open WhatsApp with a ready message ----- */
 function openWhatsApp(message) {
   if (WHATSAPP_NUMBER.includes("X")) {
-    toast("Demo mode: replace 91XXXXXXXXXX in index.html with your real number.");
+    toast("Demo mode: replace 919821436198 in index.html with your real number.");
   }
   const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
   window.open(url, "_blank", "noopener");
