@@ -247,12 +247,12 @@ footer{padding:56px 0 30px}
       <p class="eyebrow">Custom printed &bull; Made in India</p>
       <h1>WEAR YOUR<br><span>OWN WORDS</span></h1>
       <div class="marker">apni line, apni T-shirt.</div>
-      <p class="sub">T-shirts, hoodies and tee sets printed fresh with your lines, your name or your design. Pick a drop or design your own, then order on WhatsApp.</p>
+      <p class="sub">T-shirts, hoodies, tee sets and mugs printed fresh with your lines, your name or your design. Pick a drop or design your own, then order on WhatsApp.</p>
       <div class="hero-btns">
         <a href="#custom" class="btn btn-lime">Design Your Tee</a>
         <button class="btn btn-line" id="heroWA"><svg viewBox="0 0 24 24"><path id="waPath0" d=""/></svg> Order on WhatsApp</button>
       </div>
-      <div class="chips"><span>T-shirts</span><span>Hoodies</span><span>Tee sets</span><span>6 colours</span><span>Made to order</span><span>COD available</span><span>Pan-India</span></div>
+      <div class="chips"><span>T-shirts</span><span>Hoodies</span><span>Tee sets</span><span>Mugs</span><span>6 colours</span><span>Made to order</span><span>COD available</span><span>Pan-India</span></div>
     </div>
     <div class="hero-card reveal">
       <div class="sticker">100% custom</div>
@@ -279,6 +279,7 @@ footer{padding:56px 0 30px}
       <button class="filter-btn" data-filter="Graphic Tees">Graphic Tees</button>
       <button class="filter-btn" data-filter="Hoodies">Hoodies</button>
       <button class="filter-btn" data-filter="Sets">Tee Sets</button>
+      <button class="filter-btn" data-filter="Mugs">Mugs</button>
     </div>
     <!-- Cards are created by JavaScript from the DESIGNS list below -->
     <div class="grid" id="productGrid"></div>
@@ -291,8 +292,8 @@ footer{padding:56px 0 30px}
   <div class="container">
     <div class="center reveal">
       <p class="eyebrow">Live preview</p>
-      <h2 class="title">DESIGN <em>YOUR TEE</em></h2>
-      <p class="lead">Choose your fit, type your lines, and see it on the T-shirt. Then send it to us on WhatsApp.</p>
+      <h2 class="title">DESIGN <em>YOUR OWN</em></h2>
+      <p class="lead">Choose a T-shirt, hoodie, set or mug, type your lines, and see it live. Then send it to us on WhatsApp.</p>
     </div>
 
     <div class="builder">
@@ -356,6 +357,7 @@ WhatsApp par bhejo</textarea>
       <details><summary>How long does delivery take?</summary><p>Printing takes 2-3 days and delivery 2-4 days, so about 4-6 working days in total.</p></details>
       <details><summary>How do I pay?</summary><p>We share payment details (UPI) on WhatsApp after your design and size are confirmed. Cash on delivery can be arranged on request.</p></details>
       <details><summary>Can I print my own design or lines?</summary><p>Yes. Send your own quote, name, photo or artwork on WhatsApp. Please only send designs you own or have the right to print.</p></details>
+      <details><summary>What mugs do you print on?</summary><p>11 oz ceramic mugs in white, black, navy or maroon. You can print on one side or both sides. Send your name, quote or logo on WhatsApp.</p></details>
       <details><summary>Which size should I choose?</summary><p>Oversized tees run roomy, so take your usual size for a loose fit or one size down for a regular fit. Ask us on WhatsApp and we will guide you.</p></details>
       <details><summary>Can I return a printed T-shirt?</summary><p>Custom tees are made just for you, so we cannot take returns for size or design choice. If there is a print or fabric defect, message us and we will make it right.</p></details>
     </div>
@@ -400,7 +402,7 @@ const WHATSAPP_NUMBER = "919821436198";
 const BRAND = "PRINTKARYAAR";
 
 /* 2) Scrolling strip text */
-const MARQUEE_TEXT = ["CUSTOM PRINTED", "ORDER ON WHATSAPP", "OVERSIZED", "HOODIES", "TEE SETS", "6 COLOURS", "GYM WEAR", "GRAPHIC TEES", "MADE IN INDIA", "PRINT YOUR STORY"];
+const MARQUEE_TEXT = ["CUSTOM PRINTED", "ORDER ON WHATSAPP", "OVERSIZED", "HOODIES", "TEE SETS", "MUGS", "6 COLOURS", "GYM WEAR", "GRAPHIC TEES", "MADE IN INDIA", "PRINT YOUR STORY"];
 
 /* 3) PRICES for "Design Your Tee"  (change the numbers, in rupees)
    id/name/price/sizes/category. FRONT_BACK_EXTRA = extra charge for printing front AND back. */
@@ -410,8 +412,10 @@ const FIT_TYPES = [
   { id: "gym",    name: "Gym Fit T-shirt",   note: "Stretchy, breathable",   price: 799,  garment: "tee",    sizes: ["S","M","L","XL"],       colors: ["Black","White","Navy","Grey"] },
   { id: "reg",    name: "Regular T-shirt",   note: "Classic combed cotton",  price: 699,  garment: "tee",    sizes: ["S","M","L","XL","XXL"], colors: DEFAULT_COLORS },
   { id: "hoodie", name: "Hoodie",            note: "Heavy fleece, 320 GSM",  price: 1299, garment: "hoodie", sizes: ["S","M","L","XL","XXL"], colors: DEFAULT_COLORS },
-  { id: "set",    name: "T-shirt Set (2 tees)", note: "Same print, 2 colours", price: 1599, garment: "set",  sizes: ["S","M","L","XL","XXL"], colors: ["Black + White","Black + Black","White + White","Navy + Maroon"] }
+  { id: "set",    name: "T-shirt Set (2 tees)", note: "Same print, 2 colours", price: 1599, garment: "set",  sizes: ["S","M","L","XL","XXL"], colors: ["Black + White","Black + Black","White + White","Navy + Maroon"] },
+  { id: "mug",    name: "Printed Mug",       note: "11 oz ceramic",          price: 349,  garment: "mug",    sizes: ["11 oz"],                colors: ["White","Black","Navy","Maroon"] }
 ];
+const MUG_BOTH_EXTRA = 60; /* extra charge for printing BOTH sides of a mug */
 /* extra charge for printing FRONT + BACK (per T-shirt/hoodie; a Set pays it twice) */
 const FRONT_BACK_EXTRA = 100;
 
@@ -421,7 +425,7 @@ const SHEET_CSV_URL = "";
 
 /* ---------------------------------------------------------
    5) LATEST DROPS  (change names, prices, lines here)
-   name, category ("Oversized" | "Gym Wear" | "Graphic Tees" | "Hoodies" | "Sets"), price, oldPrice (0 = hide),
+   name, category ("Oversized" | "Gym Wear" | "Graphic Tees" | "Hoodies" | "Sets" | "Mugs"), price, oldPrice (0 = hide),
    desc, sizes, badge ("" = none),
    style: "card" (song-card), "big" (huge stacked words) or "badge" (round stamp)
    title + artist (card/badge) and lines (max 4) = text printed on the sample.
@@ -442,6 +446,14 @@ let DESIGNS = [
     style: "card", title: "Midnight Drive", artist: "PRINTKARYAAR",
     lines: ["raat lambi, sadak khaali", "ik cap, ik chain, ik sapna", "duniya boli ruk ja", "main boleya chal aage"],
     colors: ["Black + White", "Black + Black", "White + White", "Navy + Maroon"], images: {} },
+  { name: "Chai First Mug", category: "Mugs", garment: "mug", price: 349, oldPrice: 499, badge: "New",
+    desc: "11 oz ceramic mug with a bold stacked print.", sizes: ["11 oz"],
+    style: "big", title: "Chai First", artist: "PRINTKARYAAR",
+    lines: ["CHAI", "FIRST", "TALK LATER"], colors: ["White", "Black", "Navy", "Maroon"], images: {} },
+  { name: "Boss Mode Mug", category: "Mugs", garment: "mug", price: 379, oldPrice: 549, badge: "",
+    desc: "Round stamp print. Your name or brand on it if you like.", sizes: ["11 oz"],
+    style: "badge", title: "BOSS", artist: "PRINTKARYAAR",
+    lines: ["BOSS MODE ON", "COFFEE LOADED", "NO MONDAYS"], colors: ["Black", "White", "Navy", "Maroon"], images: {} },
   { name: "Desi Rebel", category: "Oversized", price: 949, oldPrice: 1349, badge: "New",
     desc: "Huge stacked-word print on a boxy fit.", sizes: ["S","M","L","XL","XXL"],
     style: "big", title: "Desi Rebel", artist: "PRINTKARYAAR",
@@ -574,6 +586,17 @@ function garmentSVG(kind, view, c, placement, print) {
     if (!front && (placement === "back" || placement === "both")) s += '<g transform="translate(0 30)">' + printGroup(print, ink, dark) + '</g>';
     else if (front && placement === "front") s += '<g transform="translate(200 150) scale(.55) translate(-200 -110)">' + printGroup(print, ink, dark) + '</g>';
     else if (front && placement === "both") s += '<text x="236" y="176" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="' + ink + '">PK</text>';
+  } else if (kind === "mug") {
+    const shapes =
+      '<path d="M268 152 Q328 152 328 212 Q328 272 262 270" fill="none" stroke="' + ink + '" stroke-opacity=".25" stroke-width="26" stroke-linecap="round"/>' +
+      '<path d="M268 152 Q328 152 328 212 Q328 272 262 270" fill="none" stroke="' + color + '" stroke-width="22" stroke-linecap="round"/>' +
+      '<path d="M110 120 L270 120 L270 282 Q270 302 250 302 L130 302 Q110 302 110 282 Z"' + st + '/>' +
+      '<ellipse cx="190" cy="120" rx="80" ry="13"' + st + '/>' +
+      '<ellipse cx="190" cy="120" rx="68" ry="9" fill="#000" opacity=".45"/>' +
+      '<rect x="122" y="142" width="9" height="140" rx="4" fill="#fff" opacity=".08"/>';
+    s += front ? shapes : '<g transform="translate(380 0) scale(-1 1)">' + shapes + '</g>';
+    const showPrint = (front && (placement === "front" || placement === "both")) || (!front && placement === "both");
+    if (showPrint) s += '<g transform="translate(190 214) scale(.72) translate(-200 -190)">' + printGroup(print, ink, dark) + '</g>';
   } else {
     const neck = front ? "Q200 104" : "Q200 62";
     s += '<path d="M138 46 L62 86 L24 170 L82 196 L104 160 L104 362 L296 362 L296 160 L318 196 L376 170 L338 86 L262 46 ' + neck + ' 138 46 Z"' + st + '/>' +
@@ -606,7 +629,8 @@ function teeImage(o) {
 function dropImage(d, colorName) {
   const real = d.images && d.images[colorName];
   if (real && real.trim()) return real;
-  return teeImage({ colorName: colorName, garment: d.garment || "tee", view: "back", placement: "back", print: d, label: "SAMPLE MOCKUP" });
+  const mug = d.garment === "mug";
+  return teeImage({ colorName: colorName, garment: d.garment || "tee", view: mug ? "front" : "back", placement: mug ? "front" : "back", print: d, label: "SAMPLE MOCKUP" });
 }
 function renderDrops() {
   const grid = $("#productGrid"); grid.innerHTML = "";
@@ -668,17 +692,22 @@ const PLACEMENTS = [{ id: "back", name: "Back", note: "Big print" }, { id: "fron
 const STYLES = [{ id: "card", name: "Song Card" }, { id: "big", name: "Big Text" }, { id: "badge", name: "Round Stamp" }];
 const B = { type: "over", color: "Black", size: "M", placement: "back", style: "card", view: "back" };
 const curFit = () => FIT_TYPES.find((x) => x.id === B.type);
+const MUG_PLACEMENTS = [{ id: "front", name: "One side", note: "Print side only" }, { id: "both", name: "Both sides", note: "+ Rs " + MUG_BOTH_EXTRA }];
+const placeList = () => (curFit().garment === "mug" ? MUG_PLACEMENTS : PLACEMENTS);
 
 function opts(el, list, key, labelFn) {
   el.innerHTML = list.map((o) => '<button type="button" class="opt' + (String(o.id || o) === String(B[key]) ? " active" : "") + '" data-v="' + esc(o.id || o) + '">' + labelFn(o) + '</button>').join("");
   el.querySelectorAll(".opt").forEach((b) => b.addEventListener("click", () => {
+    const wasMug = curFit().garment === "mug";
     B[key] = b.dataset.v;
     if (key === "type") {
       const t = curFit();
+      const isMug = t.garment === "mug";
+      if (isMug !== wasMug) { B.placement = isMug ? "front" : "back"; B.view = isMug ? "front" : "back"; }
       if (!t.sizes.includes(B.size)) B.size = t.sizes[Math.min(1, t.sizes.length - 1)];
       if (!t.colors.includes(B.color)) B.color = t.colors[0];
     }
-    if (key === "placement") B.view = B.placement === "front" ? "front" : "back";
+    if (key === "placement") B.view = (B.placement === "front" || curFit().garment === "mug") ? "front" : "back";
     buildOptions(); updateBuilder();
   }));
 }
@@ -687,9 +716,13 @@ function buildOptions() {
   opts($("#oType"), FIT_TYPES, "type", (o) => esc(o.name) + "<small>" + esc(o.note) + " &bull; Rs " + o.price + "</small>");
   opts($("#oColor"), t.colors, "color", (o) => '<i style="display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;border:1px solid #666;background:' + swatchBg(o) + '"></i>' + esc(o));
   opts($("#oSize"), t.sizes, "size", (o) => esc(o));
-  opts($("#oPlace"), PLACEMENTS, "placement", (o) => esc(o.name) + "<small>" + esc(o.note) + "</small>");
+  opts($("#oPlace"), placeList(), "placement", (o) => esc(o.name) + "<small>" + esc(o.note) + "</small>");
   opts($("#oStyle"), STYLES, "style", (o) => esc(o.name));
-  $$(".vtab").forEach((v) => v.classList.toggle("active", v.dataset.view === B.view));
+  const mug = t.garment === "mug";
+  $$(".vtab").forEach((v) => {
+    v.textContent = v.dataset.view === "back" ? (mug ? "Other side" : "Back") : (mug ? "Print side" : "Front");
+    v.classList.toggle("active", v.dataset.view === B.view);
+  });
 }
 function builderPrint() {
   return { style: B.style, title: $("#bTitle").value.trim(), artist: "PRINTKARYAAR",
@@ -697,7 +730,8 @@ function builderPrint() {
 }
 function builderPrice() {
   const t = curFit();
-  return t.price + (B.placement === "both" ? FRONT_BACK_EXTRA * (t.garment === "set" ? 2 : 1) : 0);
+  if (B.placement !== "both") return t.price;
+  return t.price + (t.garment === "mug" ? MUG_BOTH_EXTRA : FRONT_BACK_EXTRA * (t.garment === "set" ? 2 : 1));
 }
 function updateBuilder() {
   const t = curFit();
@@ -709,7 +743,7 @@ $("#bLines").addEventListener("input", updateBuilder);
 $$(".vtab").forEach((v) => v.addEventListener("click", () => { B.view = v.dataset.view; $$(".vtab").forEach((x) => x.classList.toggle("active", x === v)); updateBuilder(); }));
 $("#bOrder").addEventListener("click", () => {
   const t = curFit(), p = builderPrint();
-  const place = PLACEMENTS.find((x) => x.id === B.placement).name, style = STYLES.find((x) => x.id === B.style).name;
+  const place = placeList().find((x) => x.id === B.placement).name, style = STYLES.find((x) => x.id === B.style).name;
   openWhatsApp("Hello " + BRAND + "! I want a CUSTOM PRINTED order:\n\nProduct: " + t.name + "\nColour: " + B.color + "\nSize: " + B.size +
     "\nPrint position: " + place + "\nPrint style: " + style + "\nHeading: " + (p.title || "-") + "\nMy lines:\n" + (p.lines.join("\n") || "(I will send my design here)") +
     "\n\nEstimated price: Rs " + builderPrice() + "\n\nPlease confirm the design and share payment details.");
@@ -731,13 +765,13 @@ function parseCSV(text) {
 }
 function designsFromRows(rows) {
   if (rows.length < 2) return [];
-  const head = rows[0].map((h) => h.trim().toLowerCase()), CATS = ["Oversized", "Gym Wear", "Graphic Tees", "Hoodies", "Sets"], out = [];
+  const head = rows[0].map((h) => h.trim().toLowerCase()), CATS = ["Oversized", "Gym Wear", "Graphic Tees", "Hoodies", "Sets", "Mugs"], out = [];
   rows.slice(1).forEach((r) => {
     const o = {}; head.forEach((h, i) => { o[h] = (r[i] || "").trim(); });
     if (!o.name || (o.show && o.show.toLowerCase() === "no")) return;
     out.push({
       name: o.name, category: CATS.find((c) => c.toLowerCase() === (o.category || "").toLowerCase()) || "Graphic Tees",
-      garment: ["tee","hoodie","set"].includes((o.garment || "").toLowerCase()) ? o.garment.toLowerCase() : "tee",
+      garment: ["tee","hoodie","set","mug"].includes((o.garment || "").toLowerCase()) ? o.garment.toLowerCase() : "tee",
       colors: o.colors ? o.colors.split(";").map((x) => x.trim()).filter(Boolean) : null,
       price: Number(o.price) || 0, oldPrice: Number(o.old_price) || 0, badge: o.badge || "", desc: o.description || "",
       sizes: (o.sizes || "S,M,L,XL").split(/[,\/ ]+/).filter(Boolean),
